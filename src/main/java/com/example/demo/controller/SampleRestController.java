@@ -34,11 +34,11 @@ public class SampleRestController {
         ObjectMapper mapper = new ObjectMapper();
         mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
         try{
-            String json = mapper.writeValueAsString(initSampleEvent1());
-            log.info("JSON value: {}", json);
-            Object obj =  mapper.readValue(json, ClassUtils.getClass("com.example.demo.model.DemoEventModel1"));
-            log.info("obj value: {}", obj);
-            applicationEventPublisher.publishEvent(obj);
+//            String json = mapper.writeValueAsString(initSampleEvent1());
+//            log.info("JSON value: {}", json);
+//            Object obj =  mapper.readValue(json, ClassUtils.getClass("com.example.demo.model.DemoEventModel1"));
+//            log.info("obj value: {}", obj);
+            applicationEventPublisher.publishEvent(initSampleEvent1());
         } catch (Exception e) {
             log.error("fucked up", e);
         }
@@ -59,7 +59,7 @@ public class SampleRestController {
     }
 
     private DemoEventModel2 initSampleEvent2() {
-        DemoEventModel2 modelA = new DemoEventModel2();
+        DemoEventModel2 modelA = new DemoEventModel2(this);
         modelA.setFieldA("A");
         modelA.setFieldB("B");
         modelA.setFieldC("C");
